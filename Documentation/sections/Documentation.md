@@ -1,4 +1,6 @@
-![Gini Bank API Library for iOS](img/GiniBank_Logo.png?raw=true)
+<p align="center">
+<img src="img/logo.png" width="250">
+</p>
 
 # Gini Bank API Library for iOS
 
