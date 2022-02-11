@@ -29,7 +29,7 @@ The token your provide will be added as a bearer token to all api.custom.net req
 
 ## Public Key Pinning
 
-If you want to use _Certificate pinning_, provide metadata for the upload process, you can pass both your public key pinning configuration (see [TrustKit repo](https://github.com/datatheorem/TrustKit) for more information), the metadata information (the [Gini Bank API](http://developer.gini.net/gini-api/html/index.html) is used by default) as follows:
+If you want to use _Certificate pinning_, provide metadata for the upload process, you can pass both your public key pinning configuration (see [TrustKit repo](https://github.com/datatheorem/TrustKit) for more information), the metadata information (the [Gini Bank API](https://developer.gini.net/gini-api/html/index.html) is used by default) as follows:
 
 ```swift
     let yourPublicPinningConfig = [
@@ -58,6 +58,19 @@ If you want to use _Certificate pinning_, provide metadata for the upload proces
                  pinningConfig: yourPublicPinningConfig)
         .build()
 ```
+
+For customizing an API domain please, use the following snippet:
+
+```swift
+    let giniBankAPI = GiniBankAPI
+        .Builder(client: Client(id: "your-id",
+                                secret: "your-secret",
+                                domain: "your-domain"),
+                 api: .custom(domain: "custom-api.net"),
+                 pinningConfig: yourPublicPinningConfig)
+        .build()
+```
+
 > ⚠️  **Important**
 > - The document metadata for the upload process is intended to be used for reporting.
 
