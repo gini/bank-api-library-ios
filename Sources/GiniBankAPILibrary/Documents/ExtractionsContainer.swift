@@ -10,7 +10,7 @@ import Foundation
 struct ExtractionsContainer {
     let extractions: [Extraction]
     let compoundExtractions: [String : [[Extraction]]]?
-    let candidates: [String: [Extraction.Candidate]]
+    let candidates: [Extraction.Candidate]
     let returnReasons: [ReturnReason]?
     
     enum CodingKeys: String, CodingKey {
@@ -32,10 +32,8 @@ extension ExtractionsContainer: Decodable {
                                                forKey: .extractions)
         let decodedCompoundExtractions = try container.decodeIfPresent([String : [[String : Extraction]]].self,
                                                                 forKey: .compoundExtractions)
-        
-        self.candidates = try container.decodeIfPresent([String: [Extraction.Candidate]].self,
+        let decodedCandidates = try container.decodeIfPresent([String : [Extraction.Candidate]].self,
                                                        forKey: .candidates) ?? [:]
-
         
         extractions = decodedExtractions.map { (key, value) in
             let extraction = value
@@ -55,6 +53,8 @@ extension ExtractionsContainer: Decodable {
                 }
             }
         }
+        
+        candidates = decodedCandidates.flatMap { $0.value }
         
         returnReasons = try container.decodeIfPresent([ReturnReason].self, forKey: .returnReasons)
     }
