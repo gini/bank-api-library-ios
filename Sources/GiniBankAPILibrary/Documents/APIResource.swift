@@ -16,6 +16,7 @@ public enum APIDomain {
     case custom(domain: String, path: String? = nil, tokenSource: AlternativeTokenSource?)
     
     var domainString: String {
+        
         switch self {
         case .default: return "pay-api.gini.net"
         case .gym: return "gym.gini.net"
@@ -25,8 +26,9 @@ public enum APIDomain {
     
     var path: String {
         switch self {
+        case .default: return ""
+        case .gym: return ""
         case .custom(_, let path, _): return path ?? ""
-        default: return ""
         }
     }
 }
@@ -70,8 +72,7 @@ struct APIResource<T: Decodable>: Resource {
                     URLQueryItem(name: "doctype", itemValue: docType?.rawValue)
             ]
         case .paymentRequests(let limit, let offset):
-            return [URLQueryItem(name: "offset", itemValue: offset),
-                    URLQueryItem(name: "limit", itemValue: limit)]
+            return [URLQueryItem(name: "offset", itemValue: offset),URLQueryItem(name: "limit", itemValue: limit)]
         default: return nil
         }
     }

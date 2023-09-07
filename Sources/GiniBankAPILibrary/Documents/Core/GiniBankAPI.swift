@@ -110,7 +110,7 @@ extension GiniBankAPI {
             case .custom(_, _, let tokenSource):
                 var sessionManager : SessionManager
                 if let tokenSource = tokenSource {
-                    sessionManager = SessionManager(alternativeTokenSource: tokenSource, sessionDelegate: self.sessionDelegate)
+                     sessionManager = SessionManager(alternativeTokenSource: tokenSource, sessionDelegate: self.sessionDelegate)
                 } else {
                     sessionManager = SessionManager(userDomain: userApi, sessionDelegate: self.sessionDelegate)
                 }

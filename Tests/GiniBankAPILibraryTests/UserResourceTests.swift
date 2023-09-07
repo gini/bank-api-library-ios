@@ -54,4 +54,5 @@ class UserResourceTests: XCTestCase {
         let urlString = resource.url.absoluteString
         XCTAssertEqual(urlString, "https://custom.domain.com/custom/path/api/users")
     }
+    
 }
