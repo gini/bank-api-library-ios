@@ -21,10 +21,9 @@ To initialize the library, you just need to provide the API credentials:
 If you want to use a transparent proxy with your own authentication you can specify your own domain and add `AlternativeTokenSource` protocol implementation:
 
 ```swift
-    let giniBankAPI = GiniBankAPI
-        .Builder(customApiDomain: "api.custom.net",
-                    alternativeTokenSource: MyAlternativeTokenSource)
-        .build()
+ let apiLib =  GiniBankAPI.Builder(customApiDomain: "api.custom.net",
+                                   alternativeTokenSource: MyAlternativeTokenSource)
+                                 .build()
 ```
 The token you provide will be added as a bearer token to all `api.custom.net` requests.
 
@@ -33,9 +32,9 @@ You can also specify a custom path segment, if your proxy url requires it:
 ```swift
     let giniBankAPI = GiniBankAPI
         .Builder(client: client,
-                    api: .custom(domain: "api.custom.net",
-                                path: "/custom/path",
-                                tokenSource: MyAlternativeTokenSource))
+                 api: .custom(domain: "api.custom.net",
+                              path: "/custom/path",
+                              tokenSource: MyAlternativeTokenSource))
         .build()
 ```
 
@@ -78,7 +77,8 @@ For customizing an API domain please, use the following snippet:
         .Builder(client: Client(id: "your-id",
                                 secret: "your-secret",
                                 domain: "your-domain"),
-                 api: .custom(domain: "custom-api.net"),
+                 api: .custom(domain: "custom-api.net", 
+                              path:"/custom/path"),
                  pinningConfig: yourPublicPinningConfig)
         .build()
 ```
@@ -135,7 +135,6 @@ documentService.createDocument(fileName: "myFirstDocument.jpg",
     }
 }
 ```
-
 > ⚠️  **Important**
 > - The document metadata for the upload process is intended to be used for reporting. You can find out more about it in the [Gini Bank API](https://pay-api.gini.net/documentation) documentation.
 

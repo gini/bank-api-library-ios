@@ -14,7 +14,6 @@ public enum UserDomain {
     case custom(domain: String, path: String? = nil)
     
     var domainString: String {
-        
         switch self {
         case .default: return "user.gini.net"
         case .custom(let domain, _): return domain
@@ -23,8 +22,8 @@ public enum UserDomain {
     
     var path: String {
         switch self {
-        case .default: return ""
         case .custom(_, let path): return path ?? ""
+        default: return ""
         }
     }
 }
@@ -46,8 +45,8 @@ struct UserResource<T: Decodable>: Resource {
     var path: String {
         return "\(domain.path)\(methodPath)"
     }
-    
-    private var methodPath: String {
+
+    var methodPath: String {
         switch method {
         case .token:
             return "/oauth/token"
